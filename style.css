@@ -1,0 +1,232 @@
+/* Configurações Globais e Variáveis de Cor */
+:root {
+    --bg-primary: #1a1a2e;
+    --bg-secondary: #16213e;
+    --bg-card: #202a4a;
+    --text-primary: #e0e0e0;
+    --text-secondary: #a9b2d3;
+    --accent-primary: #0f3460;
+    --accent-secondary: #e94560;
+    --success: #2ecc71;
+    --warning: #f1c40f;
+    --danger: #e74c3c;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    color: var(--text-primary);
+    font-size: 2.5rem;
+}
+
+header p {
+    color: var(--text-secondary);
+}
+
+.card {
+    background-color: var(--bg-secondary);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 25px;
+}
+
+/* Formulário */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+input[type="text"], input[type="date"] {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--accent-primary);
+    border-radius: 5px;
+    color: var(--text-primary);
+    font-size: 1rem;
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+button[type="submit"] {
+    background-color: var(--accent-secondary);
+    color: #fff;
+}
+
+.btn-secondary {
+    background-color: #4a5568;
+    color: #fff;
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+/* Lista de Clientes */
+#clientListSection h2 {
+    margin-bottom: 15px;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--accent-primary);
+    padding-bottom: 5px;
+}
+
+.client-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: var(--bg-card);
+    border-radius: var(--border-radius);
+    margin-bottom: 10px;
+    border-left: 5px solid;
+    transition: transform 0.2s ease;
+}
+
+.client-card:hover {
+    transform: translateX(5px);
+}
+
+.client-info h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.client-info p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.client-status {
+    text-align: right;
+}
+
+.client-status .status-text {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.client-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 5px;
+}
+.action-btn:hover {
+    color: var(--accent-secondary);
+}
+
+
+/* Cores de Status */
+.status-ok { border-color: var(--success); }
+.status-ok .status-text { color: var(--success); }
+
+.status-alerta { border-color: var(--warning); }
+.status-alerta .status-text { color: var(--warning); }
+
+.status-vencido { border-color: var(--danger); }
+.status-vencido .status-text { color: var(--danger); }
+
+
+/* Notificação Toast */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px 25px;
+    border-radius: 50px;
+    background-color: var(--success);
+    color: #fff;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+}
+
+.toast.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -10px);
+}
+
+/* Responsividade para Celulares */
+@media (max-width: 600px) {
+    body {
+        padding: 0;
+    }
+    .container {
+        margin: 0;
+        padding: 15px;
+    }
+    header h1 {
+        font-size: 2rem;
+    }
+    .client-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    .client-status {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}

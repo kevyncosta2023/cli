@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Vencimentos</title>
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://unpkg.com/feather-icons"></script>
+    
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <main class="container">
+        <header>
+            <h1>Gestor de Vencimentos</h1>
+            <p>Clientes com vencimento mais próximo no topo.</p>
+        </header>
+
+        <form id="formCliente" class="card">
+            <input type="hidden" id="editIndex">
+            <div class="form-group">
+                <input type="text" id="nomeInput" placeholder="Nome do Cliente" required>
+                <input type="date" id="dataInput" required>
+            </div>
+            <div class="form-actions">
+                <button type="submit" id="btnSubmit">
+                    <i data-feather="plus-circle"></i>
+                    <span>Adicionar</span>
+                </button>
+                <button type="button" id="btnCancel" class="btn-secondary hidden">
+                    <i data-feather="x-circle"></i>
+                    <span>Cancelar</span>
+                </button>
+            </div>
+        </form>
+
+        <section id="clientListSection">
+            <h2>Meus Clientes</h2>
+            <div id="clientList">
+                </div>
+        </section>
+        
+        <div id="toast" class="toast"></div>
+
+    </main>
+
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>
