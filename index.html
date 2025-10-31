@@ -15,16 +15,66 @@
 
     <main class="container">
         <header>
+            <img src="logo.png" alt="Logo" class="logo">
             <h1>Gestor de Vencimentos</h1>
             <p>Clientes com vencimento mais próximo no topo.</p>
         </header>
 
+        <section id="dashboard" class="card">
+            <h2>Resumo Financeiro e Clientes</h2>
+            <div class="dashboard-stats">
+                <div class="stat-box stat-lucro">
+                    <h3>Lucro Mensal Previsto</h3>
+                    <span id="lucroMensal">R$ 0,00</span>
+                </div>
+                <div class="stat-box stat-receber">
+                    <h3>A Receber (Próx. 7 dias)</h3>
+                    <span id="aReceberEmBreve">R$ 0,00</span>
+                </div>
+                <div class="stat-box stat-ativos">
+                    <h3>Clientes Ativos</h3>
+                    <span id="clientesAtivos">0</span>
+                </div>
+                <div class="stat-box stat-vencidos">
+                    <h3>Clientes Vencidos</h3>
+                    <span id="clientesVencidos">0</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="importExportSection" class="card">
+            <h2>Gerenciar Dados</h2>
+            <div class="form-actions">
+                <button type="button" id="btnExportar" class="btn-secondary">
+                    <i data-feather="download"></i>
+                    <span>Exportar Clientes</span>
+                </button>
+                <label for="fileImportar" class="btn-secondary btn-label">
+                    <i data-feather="upload"></i>
+                    <span>Importar Clientes</span>
+                </label>
+                <input type="file" id="fileImportar" class="hidden" accept=".json">
+            </div>
+        </section>
+
+
         <form id="formCliente" class="card">
+            <h2>Cadastrar / Editar Cliente</h2>
             <input type="hidden" id="editIndex">
+            
             <div class="form-group">
                 <input type="text" id="nomeInput" placeholder="Nome do Cliente" required>
                 <input type="date" id="dataInput" required>
             </div>
+
+            <div class="form-group">
+                <select id="tipoInput" required>
+                    <option value="unitv">UniTV (Custo R$ 12)</option>
+                    <option value="iptv">IPTV (Custo R$ 10)</option>
+                </select>
+                <input type="number" id="valorInput" placeholder="Valor do Plano (Ex: 35,00)" step="0.01" min="0" required>
+            </div>
+
             <div class="form-actions">
                 <button type="submit" id="btnSubmit">
                     <i data-feather="plus-circle"></i>
@@ -38,7 +88,13 @@
         </form>
 
         <section id="clientListSection">
-            <h2>Meus Clientes</h2>
+            <div class="list-header">
+                <h2>Meus Clientes</h2>
+                <div class="search-wrapper">
+                    <i data-feather="search"></i>
+                    <input type="text" id="searchInput" placeholder="Buscar por nome...">
+                </div>
+            </div>
             <div id="clientList">
                 </div>
         </section>
