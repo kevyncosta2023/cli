@@ -10,6 +10,7 @@
     --success: #2ecc71;
     --warning: #f1c40f;
     --danger: #e74c3c;
+    --info: #3498db; /* Nova cor para "ativos" */
     --border-radius: 8px;
     --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
@@ -38,6 +39,17 @@ header {
     margin-bottom: 30px;
 }
 
+/* NOVO: Estilo do Logo */
+.logo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%; /* Deixa redondo */
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 3px solid var(--accent-primary);
+    box-shadow: var(--box-shadow);
+}
+
 header h1 {
     color: var(--text-primary);
     font-size: 2.5rem;
@@ -55,15 +67,72 @@ header p {
     margin-bottom: 25px;
 }
 
+/* Estilos do Dashboard */
+#dashboard h2, 
+#importExportSection h2,
+#formCliente h2 {
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--accent-primary);
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+/* ATUALIZADO: Dashboard agora com 4 colunas em telas maiores */
+.dashboard-stats {
+    display: grid;
+    /* 2 colunas por padrão */
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px;
+}
+
+.stat-box {
+    background-color: var(--bg-card);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    text-align: center;
+}
+
+.stat-box h3 {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin-bottom: 10px;
+    text-transform: uppercase; /* Deixa o texto uniforme */
+}
+
+.stat-box span {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+/* Cores dos Stats */
+.stat-lucro span { color: var(--success); }
+.stat-receber span { color: var(--warning); }
+.stat-ativos span { color: var(--info); }
+.stat-vencidos span { color: var(--danger); }
+
+
+/* Seção de Import/Export */
+.btn-label {
+    padding: 10px 20px;
+}
+
 /* Formulário */
 .form-group {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     flex-direction: column;
     gap: 15px;
     margin-bottom: 20px;
 }
 
-input[type="text"], input[type="date"] {
+#formCliente .form-group:first-of-type {
+    grid-template-columns: 1fr 1fr;
+}
+
+input[type="text"], 
+input[type="date"],
+input[type="number"],
+select {
     width: 100%;
     padding: 12px;
     background-color: var(--bg-primary);
@@ -71,10 +140,17 @@ input[type="text"], input[type="date"] {
     border-radius: 5px;
     color: var(--text-primary);
     font-size: 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+input::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7;
 }
 
 .form-actions {
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
 }
 
@@ -112,12 +188,45 @@ button[type="submit"] {
 
 
 /* Lista de Clientes */
-#clientListSection h2 {
+#clientListSection .list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
     margin-bottom: 15px;
-    color: var(--text-secondary);
-    border-bottom: 1px solid var(--accent-primary);
-    padding-bottom: 5px;
 }
+
+#clientListSection h2 {
+    margin: 0;
+    color: var(--text-secondary);
+    border: none;
+    padding: 0;
+}
+
+/* NOVO: Estilos da Barra de Busca */
+.search-wrapper {
+    position: relative;
+    flex-grow: 1;
+    max-width: 300px;
+}
+
+.search-wrapper i {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+    stroke-width: 2;
+}
+
+#searchInput {
+    width: 100%;
+    padding-left: 40px; /* Espaço para o ícone */
+}
+
+/* Fim dos estilos de busca */
+
 
 .client-card {
     display: flex;
@@ -145,8 +254,18 @@ button[type="submit"] {
     color: var(--text-secondary);
 }
 
+.client-details {
+    margin-top: 5px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--text-primary);
+}
+
+
 .client-status {
     text-align: right;
+    flex-shrink: 0; 
+    margin-left: 15px;
 }
 
 .client-status .status-text {
@@ -158,6 +277,7 @@ button[type="submit"] {
     display: flex;
     gap: 10px;
     margin-top: 8px;
+    justify-content: flex-end; 
 }
 
 .action-btn {
@@ -198,6 +318,7 @@ button[type="submit"] {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+    z-index: 1000;
 }
 
 .toast.show {
@@ -213,11 +334,33 @@ button[type="submit"] {
     }
     .container {
         margin: 0;
-        padding: 15px;
+        padding: 10px;
     }
     header h1 {
         font-size: 2rem;
     }
+
+    /* Dashboard em coluna única */
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+    }
+
+    /* Formulário em coluna única */
+    .form-group {
+        grid-template-columns: 1fr;
+    }
+
+    /* Header da lista de clientes */
+    .list-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .search-wrapper {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    /* Card do cliente */
     .client-card {
         flex-direction: column;
         align-items: flex-start;
@@ -228,5 +371,9 @@ button[type="submit"] {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        margin-left: 0;
+    }
+    .client-actions {
+        justify-content: flex-start;
     }
 }
